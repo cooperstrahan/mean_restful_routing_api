@@ -1,9 +1,10 @@
-const tasks = require('../controller/tasks.js');
+const taskController = require('../controller/taskController');
 
-module.exports = function(app){
-    app.get('/tasks', function(req, res){ tasks.index(req, res)});
-    app.get('/tasks/:id', function(req, res){ tasks.info(req, res)});
-    app.post('/tasks', function(req, res){ tasks.insert(req, res)});
-    app.put('/tasks/:id', function(req, res){ tasks.update(req, res)});
-    app.delete('/tasks/:id', function(req, res){ tasks.delete(req, res)});
+module.exports = app => {
+  app
+    .get('/tasks', taskController.getAll)
+    .get('/tasks/:id', taskController.getOne)
+    .post('/tasks', taskController.createTask)
+    .put('/tasks/:id', taskController.updateTask)
+    .delete('/tasks/:id', taskController.delete);
 }
